@@ -10,10 +10,6 @@ st.write(
     """Choose the fruits you want in your custom Smoothie!
     """)
 
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-st.text(smoothiefroot_response)
-
-
 name_on_order = st.text_input('Name of Smoothie')
 st.write('The name of your Smoothie will be: ', name_on_order)
 
@@ -50,3 +46,7 @@ if ingredients_list:
         session.sql(my_insert_stmt).collect()
     
         st.success('Your Smoothie is ordered, '+name_on_order+'!', icon="✅")
+
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+# st.text(smoothiefroot_response.json())
+sf_df = st.dataframe(smoothiefroot_response.json(), use_container_width=True)
